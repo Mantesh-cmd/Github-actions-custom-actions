@@ -5,10 +5,10 @@ inputs:
     description: 'the dependencies are cache or not'
     required: false
     default: 'true'
-outputs:
-  cache-used:
-    description: cache uased or not?
-    value: ${{ steps.cache-fetch }}
+# outputs:
+#   cache-used:
+#     description: cache uased or not?
+#     value: ${{ steps.cache-fetch }}
 
 runs:
   using: composite
