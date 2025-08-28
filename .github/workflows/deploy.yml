@@ -10,6 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/cache-deps
+        with:
+          caching: false
       
   test:
     runs-on: ubuntu-latest
