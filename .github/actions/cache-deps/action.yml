@@ -5,7 +5,10 @@ inputs:
     description: 'the dependencies are cache or not'
     required: false
     default: 'true'
-
+outputs:
+  cache-used:
+    description: cache uased or not?
+    value: ${{ steps.cache-fetch }}
 
 runs:
   using: composite
@@ -21,8 +24,11 @@ runs:
           path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        id: cache-fetch
+        if: steps.cache.outputs.cache-hit != 'true' || inputs.caching == 'true'
+        run: |
+          npm ci
+          echo "cache is fetching "
         shell: bash
       - name: Lint code
         run: npm run lint

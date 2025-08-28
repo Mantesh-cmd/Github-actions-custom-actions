@@ -10,8 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/cache-deps
+        id: cache-deps
         with:
           caching: false
+      - name: output of cache dependencies
+        run: echo " the final output is ${{ steps.cache-deps.outputs.cache-used }}"
       
   test:
     runs-on: ubuntu-latest
